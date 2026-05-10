@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Sterling | Save Birch Trees</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Bangers: punchy comic-book display font | Nunito: rounded friendly body -->
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CSS Variables --- */
+        :root {
+            --background: #87CEEB;
+            --header-bg: #cfefff;
+            --card-bg: #ffffff;
+            --accent: #5DAE4F;
+            --footer-bg: #222222;
+            --border: #8B5A2B;
+            --accent-hover: #4caf50;
+            --card-border: #9AA0A6;
+            --text: #1a1a1a;
+            --muted-border: #9aa0a6;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Nunito', system-ui, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--background);
+        }
+
+        /* --- Navigation --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.4rem 6%;
+            background: rgb(30, 30, 30);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            gap: 1rem;
+        }
+
+        .logo {
+            font-family: 'Bangers', cursive;
+            font-size: 1.7rem;
+            letter-spacing: 2px;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.8rem;
+            margin: 0 auto; /* centers the links between logo and button */
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #ccc;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-hover);
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            display: inline-block;
+            padding: 0.55rem 1.2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            border: 2px solid var(--accent);
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            color: #fff;
+            border-color: var(--border);
+            transform: translateY(-3px);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+            padding: 60px 8%;
+            background:
+                linear-gradient(to bottom, #ffffff90, transparent 35%),
+                linear-gradient(to bottom, #87CEEB, #cfefff);
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-content h1 {
+            font-family: 'Bangers', cursive;
+            font-size: 3.6rem;
+            letter-spacing: 2px;
+            line-height: 1.1;
+            color: var(--text);
+            margin-bottom: 1.2rem;
+        }
+
+        .hero-content p {
+            font-size: 1.15rem;
+            margin-bottom: 0.7rem;
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .hero-image-wrap {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-image-wrap img {
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+            max-width: 100%;
+            width: 480px;
+        }
+
+        .hero-btns {
+            margin-top: 20px;
+        }
+
+        /* --- Breaking News Ticker --- */
+        .news-ticker {
+            display: flex;
+            background: rgb(220, 0, 0);
+            color: #fff;
+            height: 56px;
+            overflow: hidden;
+            align-items: center;
+            border-top: 3px solid rgb(150, 0, 0);
+            border-bottom: 3px solid rgb(150, 0, 0);
+            margin-bottom: 20px;
+        }
+
+        .ticker-title {
+            background: #000;
+            padding: 0 20px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            font-family: 'Bangers', cursive;
+            font-size: 1.3rem;
+            letter-spacing: 2px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            z-index: 2; /* Keeps title above scrolling text */
+
+        }
+
+        .ticker-content {
+            text-transform: uppercase;
+            display: flex;
+            white-space: nowrap;
+            padding-left: 100%;
+            animation: scroll-ticker 35s linear infinite;
+        }
+
+        .ticker-content span {
+            padding: 0 40px;
+            font-size: 1rem;
+            font-weight: 800;
+        }
+
+        .news-ticker:hover .ticker-content {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll-ticker {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* --- Features Section --- */
+        .features {
+            padding: 20px 5% 40px;
+            background: var(--background);
+            text-align: center;
+        }
+
+        .section-title {
+            font-family: 'Bangers', cursive;
+            letter-spacing: 2px;
+            margin-top: 4rem;
+            margin-bottom: 0;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            font-size: 2rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .feature-card {
+            padding: 1.2rem 1rem;
+            border: 3px solid var(--card-border);
+            border-radius: 12px;
+            transition: var(--transition);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            background: var(--card-bg);
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .feature-card h3 {
+            font-family: 'Bangers', cursive;
+            font-size: 1.25rem;
+            letter-spacing: 1px;
+            margin-top: 0.7rem;
+            margin-bottom: 0.6rem;
+            line-height: 1.3;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 14px 28px rgba(0,0,0,0.25);
+        }
+
+        .tag {
+            display: inline-block;
+            background: var(--accent);
+            border-radius: 5px;
+            padding: 4px 10px;
+            color: #fff;
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .bottom-title {
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.25rem;
+            font-style: italic;
+            margin-top: 60px;
+            margin-bottom: 40px;
+            line-height: 1.6;
+            padding: 0 4%;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: right;
+            background-color: var(--footer-bg);
+            border-top: 2px solid var(--muted-border);
+            padding: 18px 20px;
+            color: #ccc;
+            margin-top: 30px;
+            font-size: 0.82rem;
+        }
+
+        /* --- Animations --- */
+        .fa-gamepad {
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%   { transform: scale(1); }
+            50%  { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 900px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 40px 6%;
+            }
+            .hero-content h1 {
+                font-size: 2.6rem;
+            }
+            .hero-btns {
+                display: flex;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <a href="#" class="logo"><img src="icon-pig.png" alt="pig icon" width="26"> STERLING.</a>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#features">The Crisis</a></li>
+            <li><a href="#">Donate</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+        <a href="pay.html" class="btn btn-primary">
+            Give a Heart <i class="fa-solid fa-heart fa-fade" style="color: #ff4444; font-size: 16px;"></i>
+        </a>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>
+                The Birch Doomsday <em>Killer!</em>
+                <span style="font-size: 2.4rem;">💀</span>
+            </h1>
+            <p>This fundraiser was created to restore peace between a child and birch trees.</p>
+            <p>Donations may or may not be used to buy my son diamonds as a negotiation tactic.</p>
+            <div class="hero-btns">
+                <a href="card.html" class="btn btn-primary">Stop Birch Slayer</a>
+            </div>
+        </div>
+        <div class="hero-image-wrap">
+            <img src="both.png" alt="birch wood and tree minecraft">
+        </div>
+    </header>
+
+    <!-- BREAKING NEWS TICKER -->
+    <div class="news-ticker">
+        <div class="ticker-title">🚨 BREAKING NEWS</div>
+        <div class="ticker-content">
+            <span>😈 No One is Safe | Mobs Declare Truce, Now Working With Sterling — Minecraft in Complete Uproar!!</span>
+            <span>🌳 Another Birch Tree Has Fallen.</span>
+            <span>🪓 Sterling Seen Smiling Near Deforested Area.</span>
+            <span>💥 Sterling Declares War On Birch Trees.</span>
+        </div>
+    </div>
+
+    <!-- FEATURES / CARDS -->
+    <section id="features" class="features">
+        <div class="grid">
+            <div class="feature-card">
+                <span class="tag">UPDATE</span>
+                <h3>🌳 Birch Crisis Escalates</h3>
+                <p>Reports confirm continued deforestation in peaceful forest biomes.</p>
+            </div>
+            <div class="feature-card">
+                <span class="tag">LIVE</span>
+                <h3>🧟 The Mobs & Sterling</h3>
+                <p>Sterling & Mobs create Truce, working together killing anyone in their way!</p>
+            </div>
+            <div class="feature-card">
+                <span class="tag">ALERT</span>
+                <h3>🐝 Bee Relocation Emergency</h3>
+                <p>Bees have reportedly abandoned multiple forest zones.</p>
+            </div>
+            <div class="feature-card">
+                <span class="tag">BREAKING</span>
+                <h3>☮️ Help Create the Peace</h3>
+                <p>Saving Minecraft Birch Trees one donation at a time.</p>
+            </div>
+        </div>
+
+        <p class="bottom-title">
+            Minecraft will be doomed unless we can help <strong><em>Sterling</em></strong>
+            find the love in his heart for our innocent Birch Trees…
+        </p>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Founded By A Concerned Parent Of A Birch Tree Hater. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

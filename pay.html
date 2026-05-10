@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate | Save Sterling's Birch Trees</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --background: #87CEEB;
+            --header-bg: #cfefff;
+            --card-bg: #ffffff;
+            --accent: #5DAE4F;
+            --footer-bg: #222222;
+            --border: #8B5A2B;
+            --accent-hover: #4caf50;
+            --card-border: #9AA0A6;
+            --danger-bg: #bb0909;
+            --text: #1a1a1a;
+            --muted-border: #9aa0a6;
+            --transition: all 0.3s ease;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(to bottom, #87CEEB, #cfefff);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: var(--text);
+        }
+
+        /* --- NAV --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.4rem 6%;
+            background: rgb(30, 30, 30);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            gap: 1rem;
+        }
+
+        .logo {
+            font-family: 'Bangers', cursive;
+            font-size: 1.7rem;
+            letter-spacing: 2px;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.8rem;
+            margin: 0 auto;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #ccc;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover { color: var(--accent-hover); }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0.55rem 1.2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            border: 2px solid var(--accent);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        /* --- TICKER --- */
+        .news-ticker {
+            display: flex;
+            background: rgb(220, 0, 0);
+            color: #fff;
+            height: 48px;
+            overflow: hidden;
+            align-items: center;
+            border-top: 3px solid rgb(150, 0, 0);
+            border-bottom: 3px solid rgb(150, 0, 0);
+        }
+
+        .ticker-title {
+            background: #000;
+            padding: 0 18px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            font-family: 'Bangers', cursive;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            z-index: 2;
+        }
+
+        .ticker-content {
+            text-transform: uppercase;
+            display: flex;
+            white-space: nowrap;
+            padding-left: 100%;
+            animation: scroll-ticker 30s linear infinite;
+            font-size: 0.88rem;
+            font-weight: 800;
+        }
+
+        .ticker-content span { padding: 0 36px; }
+
+        .news-ticker:hover .ticker-content { animation-play-state: paused; }
+
+        @keyframes scroll-ticker {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* --- PAGE --- */
+        .page {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 50px 5% 70px;
+        }
+
+        /* --- FORM CARD --- */
+        .form-card {
+            background: var(--card-bg);
+            border: 3px solid var(--card-border);
+            border-radius: 16px;
+            overflow: hidden;
+            width: 100%;
+            max-width: 520px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.18);
+        }
+
+        .form-header {
+            background: linear-gradient(to bottom, #ffffff90, transparent 35%),
+                        linear-gradient(to bottom, #87CEEB, #cfefff);
+            padding: 24px 30px 20px;
+            border-bottom: 3px solid var(--card-border);
+        }
+
+        .form-header h2 {
+            font-family: 'Bangers', cursive;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            color: var(--text);
+            line-height: 1.1;
+        }
+
+        .form-header p {
+            font-size: 0.88rem;
+            color: #555;
+            margin-top: 5px;
+        }
+
+        .form-body { padding: 26px 30px 30px; }
+
+        /* Amount buttons */
+        .field-label {
+            display: block;
+            font-size: 0.76rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .amount-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .amount-btn {
+            background: #f5f5f5;
+            border: 2px solid var(--card-border);
+            border-radius: 10px;
+            color: var(--text);
+            font-family: 'Bangers', cursive;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            padding: 12px 8px 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .amount-btn .amt-emoji {
+            display: block;
+            font-size: 1.3rem;
+            margin-bottom: 2px;
+        }
+
+        .amount-btn .amt-desc {
+            display: block;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.66rem;
+            font-weight: 700;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .amount-btn:hover,
+        .amount-btn.active {
+            border-color: var(--accent);
+            background: #edf7ec;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(93,174,79,0.2);
+        }
+
+        .amount-btn.active .amt-desc { color: var(--accent); }
+
+        /* Custom amount */
+        .custom-wrap {
+            position: relative;
+            margin-bottom: 0;
+        }
+
+        .custom-wrap .currency {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: 'Bangers', cursive;
+            font-size: 1.1rem;
+            color: #aaa;
+            pointer-events: none;
+        }
+
+        .custom-input {
+            width: 100%;
+            background: #f9f9f9;
+            border: 2px solid var(--card-border);
+            border-radius: 10px;
+            color: var(--text);
+            font-family: 'Nunito', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 11px 14px 11px 32px;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .custom-input::placeholder { color: #bbb; }
+
+        .custom-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(93,174,79,0.15);
+        }
+
+        .divider {
+            border: none;
+            border-top: 2px solid #f0f0f0;
+            margin: 22px 0;
+        }
+
+        /* Fields */
+        .field-group { margin-bottom: 14px; }
+
+        .field-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .field-input {
+            width: 100%;
+            background: #f9f9f9;
+            border: 2px solid var(--card-border);
+            border-radius: 10px;
+            color: var(--text);
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 11px 14px;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .field-input::placeholder { color: #bbb; }
+
+        .field-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(93,174,79,0.15);
+        }
+
+        textarea.field-input {
+            resize: vertical;
+            min-height: 78px;
+        }
+
+        /* Checkbox */
+        .checkbox-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .checkbox-wrap input[type="checkbox"] {
+            width: 17px;
+            height: 17px;
+            accent-color: var(--accent);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .checkbox-wrap span {
+            font-size: 0.83rem;
+            color: #666;
+            font-weight: 600;
+        }
+
+        /* Submit */
+        .submit-btn {
+            width: 100%;
+            background: var(--accent);
+            border: 2px solid var(--accent);
+            border-radius: 10px;
+            color: #fff;
+            font-family: 'Bangers', cursive;
+            font-size: 1.4rem;
+            letter-spacing: 2px;
+            padding: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            background: var(--accent-hover);
+            border-color: var(--border);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(93,174,79,0.3);
+        }
+
+        .submit-btn:active { transform: translateY(0); }
+
+        .secure-note {
+            text-align: center;
+            font-size: 0.71rem;
+            color: #aaa;
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        /* Success overlay */
+        .success-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .success-overlay.show { display: flex; }
+
+        .success-box {
+            background: var(--card-bg);
+            border: 3px solid var(--accent);
+            border-radius: 20px;
+            padding: 44px 36px;
+            text-align: center;
+            max-width: 400px;
+            margin: 16px;
+            box-shadow: 0 12px 50px rgba(0,0,0,0.25);
+            animation: pop-in 0.4s cubic-bezier(0.34,1.56,0.64,1) both;
+        }
+
+        @keyframes pop-in {
+            from { transform: scale(0.7); opacity: 0; }
+            to   { transform: scale(1);   opacity: 1; }
+        }
+
+        .success-box .big-emoji {
+            font-size: 3.5rem;
+            display: block;
+            margin-bottom: 14px;
+        }
+
+        .success-box h2 {
+            font-family: 'Bangers', cursive;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        .success-box p {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .close-btn {
+            width: 100%;
+            margin-top: 20px;
+            background: var(--accent);
+            border: 2px solid var(--accent);
+            border-radius: 10px;
+            color: #fff;
+            font-family: 'Bangers', cursive;
+            font-size: 1.2rem;
+            letter-spacing: 1.5px;
+            padding: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: right;
+            background-color: var(--footer-bg);
+            border-top: 2px solid var(--muted-border);
+            padding: 16px 20px;
+            color: #ccc;
+            font-size: 0.82rem;
+        }
+
+        @media (max-width: 560px) {
+            .field-row { grid-template-columns: 1fr; }
+            .amount-grid { grid-template-columns: repeat(2, 1fr); }
+            .form-body { padding: 20px 18px; }
+            .form-header { padding: 18px 18px; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <a href="card.html" class="logo"><img src="icon-pig.png" alt="pig" width="24"> STERLING.</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#features">The Crisis</a></li>
+            <li><a href="donate.html">Donate</a></li>
+        </ul>
+        <a href="index.html" class="btn btn-primary">Stop Sterling <i class="fa-solid fa-skull fa-fade" style="color:#ff4444;font-size:14px;"></i></a>
+    </nav>
+
+    <!-- TICKER -->
+    <div class="news-ticker">
+        <div class="ticker-title">🚨 LIVE UPDATES</div>
+        <div class="ticker-content">
+            <span>💎 Anonymous donated diamonds — Sterling still unimpressed</span>
+            <span>🌳 3 more birch trees lost in the last hour</span>
+            <span>🪓 Sterling reportedly sharpened his axe AGAIN</span>
+            <span>🐝 Bee population critical — evacuations underway</span>
+            <span>☮️ Peace negotiations FAILED — Sterling demands more diamonds</span>
+        </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="page">
+        <div class="form-card">
+            <div class="form-header">
+                <h2>💎 Make Your Donation</h2>
+                <p>100% goes toward bribing Sterling with diamonds &amp; snacks.</p>
+            </div>
+            <div class="form-body">
+
+                <label class="field-label">Choose an amount</label>
+                <div class="amount-grid">
+                    <button class="amount-btn" onclick="selectAmount(this, 5)">
+                        <span class="amt-emoji">🌱</span>$5
+                        <span class="amt-desc">1 Sapling</span>
+                    </button>
+                    <button class="amount-btn active" onclick="selectAmount(this, 10)">
+                        <span class="amt-emoji">🌳</span>$10
+                        <span class="amt-desc">1 Tree Saved</span>
+                    </button>
+                    <button class="amount-btn" onclick="selectAmount(this, 20)">
+                        <span class="amt-emoji">🐝</span>$20
+                        <span class="amt-desc">Bee Rescue</span>
+                    </button>
+                    <button class="amount-btn" onclick="selectAmount(this, 50)">
+                        <span class="amt-emoji">💎</span>$50
+                        <span class="amt-desc">1 Diamond</span>
+                    </button>
+                    <button class="amount-btn" onclick="selectAmount(this, 100)">
+                        <span class="amt-emoji">⚔️</span>$100
+                        <span class="amt-desc">Full Netherite</span>
+                    </button>
+                    <button class="amount-btn" onclick="selectAmount(this, 'custom')">
+                        <span class="amt-emoji">🤑</span>Other
+                        <span class="amt-desc">Your Choice</span>
+                    </button>
+                </div>
+
+                <div class="custom-wrap" id="customWrap" style="display:none;">
+                    <span class="currency">$</span>
+                    <input type="number" class="custom-input" id="customAmt" placeholder="Enter amount" min="1">
+                </div>
+
+                <hr class="divider">
+
+                <div class="field-row">
+                    <div class="field-group">
+                        <label class="field-label">First Name</label>
+                        <input type="text" class="field-input" placeholder="Your name">
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label">Last Name</label>
+                        <input type="text" class="field-input" placeholder="Last name">
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Email Address</label>
+                    <input type="email" class="field-input" placeholder="you@email.com">
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Message for Sterling 💬</label>
+                    <textarea class="field-input" placeholder="e.g. Sterling please stop. The trees never did anything to you. 🌳"></textarea>
+                </div>
+
+                <label class="checkbox-wrap">
+                    <input type="checkbox" checked>
+                    <span>Send me updates on whether Sterling has shown ANY remorse 😤</span>
+                </label>
+
+                <button class="submit-btn" onclick="handleDonate()">
+                    💚 DONATE &amp; SAVE THE TREES
+                </button>
+
+                <p class="secure-note">
+                    <i class="fa-solid fa-lock" style="font-size:11px;"></i>
+                    Secure donation · No actual trees were harmed making this page
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="success-overlay" id="successOverlay">
+        <div class="success-box">
+            <span class="big-emoji">💎</span>
+            <h2>DIAMONDS SENT! 🌳</h2>
+            <p>Your love has been dispatched to Sterling. He was informed. He looked at the diamonds, said "cool", and chopped another tree. 🪓</p>
+            <p>But we believe in him. 💚</p>
+            <button class="close-btn" onclick="closeSuccess()">💚 Keep Fighting</button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Founded By A Concerned Parent Of A Birch Tree Hater. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function selectAmount(btn, val) {
+            document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('customWrap').style.display = val === 'custom' ? 'block' : 'none';
+        }
+
+        function handleDonate() {
+            document.getElementById('successOverlay').classList.add('show');
+        }
+
+        function closeSuccess() {
+            document.getElementById('successOverlay').classList.remove('show');
+        }
+
+        document.getElementById('successOverlay').addEventListener('click', function(e) {
+            if (e.target === this) closeSuccess();
+        });
+    </script>
+
+</body>
+</html>
